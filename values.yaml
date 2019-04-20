@@ -1,72 +1,20 @@
-# Default values for shared chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-fullnameOverride: VALUE_TO_BE_OVERRIDDEN
-
-replicaCount: 1
-
+fullname: hello-world-application
+name: hello-world
 image:
-  repository: VALUE_TO_BE_OVERRIDDEN
-  tag: VALUE_TO_BE_OVERRIDDEN
-  pullPolicy: IfNotPresent
-
-imagePullSecrets: []
-  # Optionally specify an array of imagePullSecrets.
-  # Secrets must be manually created in the namespace.
-  # ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
-  #
-  # This uses credentials from secret "myRegistryKeySecretName".
-  # - name: myRegistryKeySecretName
-
-containerPort:
-  name: VALUE_TO_BE_OVERRIDDEN
-  containerPort: VALUE_TO_BE_OVERRIDDEN
-  protocol: VALUE_TO_BE_OVERRIDDEN
-  
-env:
-  blobContainerUrl: VALUE_TO_BE_OVERRIDDEN
-  storageConnectionString: VALUE_TO_BE_OVERRIDDEN
-  blobContainerName: VALUE_TO_BE_OVERRIDDEN
-  cosmosdbEndPoint: VALUE_TO_BE_OVERRIDDEN
-  cosmosdbKey: VALUE_TO_BE_OVERRIDDEN
-  applicationInsightsInstrumentationKey: VALUE_TO_BE_OVERRIDDEN
-
+  repository: mcr.microsoft.com/dotnet/core/samples
+  tag: aspnetapp
+annotations:
+  kubernetes.io/ingress.class: nginx
+  nginx.ingress.kubernetes.io/ssl-redirect: false
+  nginx.ingress.kubernetes.io/rewrite-target: /
 service:
   type: ClusterIP
   port: 80
   targetPort: http
   protocol: TCP
   portName: http
-
 probes:
   enabled: false
-
 ingress:
-  enabled: false
-  annotations:
-    kubernetes.io/ingress.class: addon-http-application-routing
-    # kubernetes.io/tls-acme: "true"
-  path: /
-  # hosts:
-  #   - host: chart-example.local
-  tls: []
-    # - secretName: chart-example-tls
-    #   hosts:
-    #     - chart-example.local
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+  enabled: true
+  path: /helloworld
