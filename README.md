@@ -1,5 +1,11 @@
 # Helm Shared Chart
 
+## Test the Chart
+
+```bash
+helm template . -f values.yaml --debug
+```
+
 ## Package and Deploy
 
 ```bash

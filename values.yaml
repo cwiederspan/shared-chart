@@ -1,20 +1,22 @@
 fullname: hello-world-application
+
 name: hello-world
+
 image:
   repository: mcr.microsoft.com/dotnet/core/samples
   tag: aspnetapp
-annotations:
-  kubernetes.io/ingress.class: nginx
-  nginx.ingress.kubernetes.io/ssl-redirect: false
-  nginx.ingress.kubernetes.io/rewrite-target: /
+
 service:
   type: ClusterIP
   port: 80
-  targetPort: http
-  protocol: TCP
-  portName: http
+  
 probes:
   enabled: false
+
 ingress:
   enabled: true
   path: /helloworld
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /
