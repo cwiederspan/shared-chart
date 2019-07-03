@@ -3,10 +3,7 @@ kind: Service
 metadata:
   name: {{ include "shared-chart.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "shared-chart.name" . }}
-    helm.sh/chart: {{ include "shared-chart.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{ include "shared-chart.labels" . | indent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -15,5 +12,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "shared-chart.name" . }}
-    release: {{ .Release.Name }}
+    app.kubernetes.io/name: {{ include "shared-chart.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

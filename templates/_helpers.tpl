@@ -30,3 +30,16 @@ Create chart name and version as used by the chart label.
 {{- define "shared-chart.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Common labels
+*/}}
+{{- define "shared-chart.labels" -}}
+app.kubernetes.io/name: {{ include "shared-chart.name" . }}
+helm.sh/chart: {{ include "shared-chart.chart" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end -}}

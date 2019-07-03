@@ -2,7 +2,6 @@
 # This supports shell glob matching, relative path matching, and
 # negation (prefixed with !). Only one pattern per line.
 .DS_Store
-
 # Common VCS dirs
 .git/
 .gitignore
@@ -11,20 +10,13 @@
 .hg/
 .hgignore
 .svn/
-
 # Common backup files
 *.swp
 *.bak
 *.tmp
 *~
-
 # Various IDEs
 .project
 .idea/
 *.tmproj
-
-# Because we don't want to include the Values.yaml file - it's
-# only here as an example - we should ignore it here
-values.yaml
-README.md
-*.tgz
+.vscode/
